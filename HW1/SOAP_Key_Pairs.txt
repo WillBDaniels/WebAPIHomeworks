@@ -1,0 +1,29 @@
+William Daniels
+Web-API 
+
+**Request Headers**
+=============================================================================
+	POST http://www.webservicex.net/geoipservice.asmx HTTP/1.1 --> This is the actual request itself
+	Accept-Encoding: gzip,deflate --> What kind of encoding we will accept from the server
+	Content-Type: text/xml;charset=UTF-8 --> What sort of content type we will accept from the server
+	SOAPAction: "http://www.webservicex.net/GetGeoIP" --> This is what 'SOAP Action' we want the server to execute
+	Content-Length: 316 --> This is the number of bytes we're posting to the server
+	Host: www.webservicex.net --> This is who we're posting to
+	Connection: Keep-Alive --> Since this is set to 'keep alive' it says we want to keep the connection alive throughout the POST request
+	User-Agent: Apache-HttpClient/4.1.1 (java 1.5) --> This is what software is sending the request on our behalf. 
+============================================================================
+**Response Headers**
+============================================================================
+
+	HTTP/1.1 200 OK --> This is the http status code, in our case, it meant it was a good request
+	Cache-Control: private, max-age=0 --> This tells how the content was cached along the path
+	Content-Type: text/xml; charset=utf-8 --> This tells what kind of response we are getting, in this case, xml and text
+	Server: Microsoft-IIS/7.0 --> This tells us what kind of server the host is running
+	X-AspNet-Version: 4.0.30319 --> This is a custom proprietary header, in this case telling us what version of asp.net they are using
+	X-Powered-By: ASP.NET --> Again a proprietary header, telling us that they're using asp.netin the first place. 
+	Date: Mon, 26 Jan 2015 23:01:34 GMT --> This is simply the date/time of the response
+	Content-Length: 515 --> This is how many bytes is in the body of the response, again, one of the more important headers. 
+	Via: 1.1 wsa2-man.ucdenver.pvt:80 (Cisco-IronPort-WSA/7.7.0-760) --> This describes the route we took
+	Connection: keep-alive --> This tells us that the server is willing to simply accept another request. 
+
+	<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetGeoIPResponse xmlns="http://www.webservicex.net/"><GetGeoIPResult><ReturnCode>1</ReturnCode><IP>24.8.102.174</IP><ReturnCodeDetails>Success</ReturnCodeDetails><CountryName>United States</CountryName><CountryCode>USA</CountryCode></GetGeoIPResult></GetGeoIPResponse></soap:Body></soap:Envelope> --> This is the actual body of the response

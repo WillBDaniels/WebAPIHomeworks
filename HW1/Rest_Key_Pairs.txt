@@ -1,0 +1,29 @@
+William Daniels
+Web API's
+
+**Request Headers:** 
+========================================================
+
+	User-Agent --> This key/pair is for describing what software is being used to communicate with the Server. 
+	Content-Type --> This is what sort of content is being sent to the server, aka: text/json/xml, etc. 
+	Accept --> This tells what sort of files we want to get from the server, in our case (*/*) we want everything
+	X-Client Data --> This is simply a proprietary header that defines the session and the client connecting to it, likely for rate-limiting traffic from a single machine
+	Accept-Encoding --> This defines what kind of encoding methods we are allowing to be sent back that we will recognize, things like zip format, encoding format (utf, etc. etc)
+	Accept-Language --> Pretty self explanatory, what language we want the response to be in
+========================================================
+**Response Headers**
+========================================================
+	Status --> This is the status of the request returned from the server, can be any number of things as defined by the current standard
+	Version --> This is what version of the protocol is being returned, lately seems to always be HTTP/1.1
+	alternate-protocol --> This gives an alternate way of obtaining the same data, usually things like https instead of http, etc. 
+	Cache-Control  --> This tells the user how the CDN is caching the information along the route to host. 
+	Date --> This is straightforward, simply the date. 
+	expires --> This is the server telling how long this response is considered 'still valid'
+	Server --> This tells the client what kind of server is being run on the host. 
+	Vary --> This tells more about the caching mechanisms. Lots of caching in google. 
+	content-encoding --> this tells what kind of encoding is being used to send the content to the user, gzip is what was used in this case. 
+	content-length --> The number of bytes being sent in the body of the response, arguably one of the most important headers. 
+	etag --> This is simply an 'electronic tag', tags the session uniquely for reference
+	x-content-type-options --> another custom header, in our case defines some extra content type options, something called' nosniff' whatever that means. 
+	x-frame-options --> Custom headers galore! this is something proprietary called 'SAMEORIGIN'
+	x-xss-protection --> last proprietary header, thank googness. 
