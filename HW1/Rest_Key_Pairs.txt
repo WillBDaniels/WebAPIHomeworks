@@ -4,26 +4,26 @@ Web API's
 **Request Headers:** 
 ========================================================
 
-	User-Agent --> This key/pair is for describing what software is being used to communicate with the Server. 
-	Content-Type --> This is what sort of content is being sent to the server, aka: text/json/xml, etc. 
-	Accept --> This tells what sort of files we want to get from the server, in our case (*/*) we want everything
+	User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36 --> This key/pair is for describing what software is being used to communicate with the Server. In our case, we are using either mozilla, chrome, or safari, using AppleWebKit for rendering the web page. 
+	Content-Type: text/plain; charset=utf-8  --> This is what sort of content is being sent to the server, aka: text/json/xml, etc. In our case, we're using utf-8 (1 byte per character), and we're expecting plain text response
+	Accept: */* --> This tells what sort of files we want to get from the server, in our case (*/*) we want everything
 	X-Client Data --> This is simply a proprietary header that defines the session and the client connecting to it, likely for rate-limiting traffic from a single machine
-	Accept-Encoding --> This defines what kind of encoding methods we are allowing to be sent back that we will recognize, things like zip format, encoding format (utf, etc. etc)
-	Accept-Language --> Pretty self explanatory, what language we want the response to be in
+	Accept-Encoding: gzip, deflate, sdch --> This defines what kind of encoding methods we are allowing to be sent back that we will recognize, things like zip format, encoding format (utf, etc. etc). In our case, we accept gzip (compression) deflate (decompression) types. 
+	Accept-Language: en-US,en;q=0.8 --> Pretty self explanatory, what language we want the response to be in, in our case we only accept English. 
 ========================================================
 **Response Headers**
 ========================================================
-	Status --> This is the status of the request returned from the server, can be any number of things as defined by the current standard
-	Version --> This is what version of the protocol is being returned, lately seems to always be HTTP/1.1
-	alternate-protocol --> This gives an alternate way of obtaining the same data, usually things like https instead of http, etc. 
-	Cache-Control  --> This tells the user how the CDN is caching the information along the route to host. 
-	Date --> This is straightforward, simply the date. 
-	expires --> This is the server telling how long this response is considered 'still valid'
-	Server --> This tells the client what kind of server is being run on the host. 
+	Status: 200 OK --> This is the status of the request returned from the server, can be any number of things as defined by the current standard. In our case, this means the request was OK and understood. 
+	Version: HTTP/1.1 --> This is what version of the protocol is being returned, lately seems to always be HTTP/1.1, which is the latest HTTP standard.
+	alternate-protocol: 443:quic,p=0.02 --> This gives an alternate way of obtaining the same data, usually things like https instead of http, etc. In this case, it sais that we can use https instead of http if we want or need. 
+	Cache-Control: private, max-age=0, must-revalidate, no-transform  --> This tells the user how the CDN is caching the information along the route to host. In this case, there is absolutely no caching. It is handled privately, has no age, forces you to re-validate every time you connect, and you can't transform the request. 
+	Date: Mon, 02 Feb 2015 21:21:26 GMT --> This is straightforward, simply the date. The value that is gave us is, unsurpsisingly, the current date. 
+	etag: "-roYZe-KGC8fMhY8_FAC-zdHGwU/sNXsM1r75i9PLRT-EMt79k7HOL4" --> This is the electronic tag that identifies our computer, some sort of hash they computed with some parameters. 
+	expires: Mon, 02 Feb 2015 21:21:26 GMT --> This is the server telling how long this response is considered 'still valid'. This date is the exact same as the date field, because there is a max-age of 0 on the connection. 
+	Server: GSE --> This tells the client what kind of server is being run on the host. Not sure what type of server 'GSE' is. 
 	Vary --> This tells more about the caching mechanisms. Lots of caching in google. 
-	content-encoding --> this tells what kind of encoding is being used to send the content to the user, gzip is what was used in this case. 
-	content-length --> The number of bytes being sent in the body of the response, arguably one of the most important headers. 
-	etag --> This is simply an 'electronic tag', tags the session uniquely for reference
-	x-content-type-options --> another custom header, in our case defines some extra content type options, something called' nosniff' whatever that means. 
-	x-frame-options --> Custom headers galore! this is something proprietary called 'SAMEORIGIN'
-	x-xss-protection --> last proprietary header, thank googness. 
+	content-encoding: GZIP --> this tells what kind of encoding is being used to send the content to the user, gzip is what was used in this case. In our case, they compressed the information using the gzip standard.
+	content-length: 5064 --> The number of bytes being sent in the body of the response, arguably one of the most important headers. In our case, we have 5064 bytes returned by the server
+	x-content-type-options: nosniff --> another custom header, in our case defines some extra content type options, something called' nosniff' whatever that means. 
+	x-frame-options: SAMEORIGIN --> Custom headers galore! this is something proprietary called 'SAMEORIGIN'
+	x-xss-protection: 1; mode-block --> last proprietary header, thank googness. 
