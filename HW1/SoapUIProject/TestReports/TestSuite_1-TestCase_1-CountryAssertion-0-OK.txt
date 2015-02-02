@@ -1,0 +1,7 @@
+Status: OK
+Time Taken: 0
+Size: 0
+Timestamp: Mon Feb 02 14:54:00 MST 2015
+TestStep: CountryAssertion
+
+----------------- Messages ------------------------------

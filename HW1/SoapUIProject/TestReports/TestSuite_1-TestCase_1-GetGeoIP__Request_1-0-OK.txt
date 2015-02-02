@@ -1,0 +1,58 @@
+Status: OK
+Time Taken: 5013
+Size: 515
+Timestamp: Mon Feb 02 14:53:55 MST 2015
+TestStep: GetGeoIP - Request 1
+
+----------------- Messages ------------------------------
+
+----------------- Properties ------------------------------
+Encoding: UTF-8
+Endpoint: http://www.webservicex.net/geoipservice.asmx
+
+---------------- Request ---------------------------
+Request Headers: Host : www.webservicex.net
+Content-Length : 316
+SOAPAction : "http://www.webservicex.net/GetGeoIP"
+Accept-Encoding : gzip,deflate
+User-Agent : Apache-HttpClient/4.1.1 (java 1.5)
+Connection : Keep-Alive
+Content-Type : text/xml;charset=UTF-8
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webservicex.net/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetGeoIP>
+         <!--Optional:-->
+         <web:IPAddress>24.8.102.174</web:IPAddress>
+      </web:GetGeoIP>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+---------------- Response --------------------------
+Response Headers: X-AspNet-Version : 4.0.30319
+Date : Mon, 02 Feb 2015 21:53:58 GMT
+#status# : HTTP/1.1 200 OK
+Content-Length : 515
+Via : 1.1 wsa2-man.ucdenver.pvt:80 (Cisco-IronPort-WSA/7.7.0-760)
+Connection : keep-alive
+Content-Type : text/xml; charset=utf-8
+X-Powered-By : ASP.NET
+Server : Microsoft-IIS/7.0
+Cache-Control : private, max-age=0
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <GetGeoIPResponse xmlns="http://www.webservicex.net/">
+         <GetGeoIPResult>
+            <ReturnCode>1</ReturnCode>
+            <IP>24.8.102.174</IP>
+            <ReturnCodeDetails>Success</ReturnCodeDetails>
+            <CountryName>United States</CountryName>
+            <CountryCode>USA</CountryCode>
+         </GetGeoIPResult>
+      </GetGeoIPResponse>
+   </soap:Body>
+</soap:Envelope>
