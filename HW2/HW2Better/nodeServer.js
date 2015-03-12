@@ -7,12 +7,29 @@
 var sys = require("sys");
 var my_http = require("http");
 var url = require("url");
-my_http.createServer(function(request, response){
-	//Chrome likes to send two requests every time, one looking for the favicon. I don't want to waste cycles on a favicon, so I check for
-	//this specific case. 
-    if(request.url === '/favicon.ico') {
-        response.end();
-    }else{
+var a127 = require('a127-magic');
+var express = require('express');
+
+var PORT = process.env.PORT || 8889;
+
+function startExpress(){
+	var app = express();
+	a127.init(function(config) { 
+		app.use(a127.middleware(config));
+		app.listen(PORT);
+		//printHelp();
+		startServer();
+	});
+}
+
+startExpress();
+
+function startServer(){
+	console.log("starting server...");
+	my_http.createServer(function(request, response){
+    	if(request.url === '/favicon.ico') {
+        	response.end();
+    	}else{
 		var responseText = "";
 		var method = request.method;
 		var urlStuff = url.parse(request.url, true);
@@ -57,10 +74,8 @@ my_http.createServer(function(request, response){
 		response.write(responseText);
 		response.end();
 	}
-}).listen(80, function(){
-	console.log('the server is listening on port 80');
-});
-
+	}).listen(8888);
+}
 function buildResponeToClient(request){
 	var outputString = "";
 	outputString += "request headers: " + JSON.stringify(request.headers, null, 4) + "\n";

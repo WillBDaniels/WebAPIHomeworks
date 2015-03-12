@@ -1,0 +1,45 @@
+{
+  "name": "HW2_better",
+  "version": "2.0.0",
+  "private": "true",
+  "description": "Better HW2 project",
+  "keywords": [
+    "apigee",
+    "a127"
+  ],
+  "author": "William Daniels <willbdaniels@gmail.com>",
+  "license": "MIT",
+  "main": "nodeServer.js",
+  "dependencies": {
+    "underscore": "",
+    "express": "",
+    "a127-magic": "^0.7.0",
+    "volos-analytics-apigee": "",
+    "volos-analytics-common": "",
+    "volos-analytics-memory": "",
+    "volos-cache-apigee": "",
+    "volos-cache-memory": "",
+    "volos-cache-redis": "",
+    "volos-quota-apigee": "",
+    "volos-quota-memory": "",
+    "volos-quota-redis": "",
+    "volos-oauth-redis": "",
+    "volos-oauth-apigee": ""
+  },
+  "devDependencies":  {
+    "volos-management-apigee": "",
+    "should": "4.4.x",
+    "supertest": "0.15.x"
+  },
+  "scripts" : {
+    "start" : "nodeServer.js"
+  },
+  "api": {
+    "name": "HW2 better",
+    "getPath": "/get",
+    "putPath": "/put",
+    "postPath": "/post",
+    "deletePath": "/delete",
+    "main": "nodeServer.js"
+  }
+}

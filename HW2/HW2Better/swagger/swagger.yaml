@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  version: 0.0.1
+  title: Twitter search example
+  description: Twitter search example
+  termsOfService: "http://apigee.com/about/terms"
+  contact:
+    name: Apigee 127
+    url: https://github.com/apigee-127
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+host: localhost
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+  - application/x-www-form-urlencoded
+produces:
+  - application/json
+x-a127-config:
+  RemoteProxy.key: &apigeeProxyKey CONFIGURED
+  RemoteProxy.uri: &apigeeProxyUri CONFIGURED
+x-a127-services:
+  cache:
+    provider: volos-cache-memory
+    options:
+      name: name
+      ttl: 10000
+  quota:
+    provider: volos-quota-memory
+    options:
+      timeUnit: minute
+      interval: 1
+      allow: 2
+  analytics:
+    provider: volos-analytics-apigee
+    options:
+      key: *apigeeProxyKey
+      uri: *apigeeProxyUri
+      proxy: ExampleApi,
+      bufferSize: 100,
+      flushInterval: 10,
+      batchSize: 10
+  oauth2:
+    provider: volos-oauth-apigee
+    options:
+      cache: cache
+      key: *apigeeProxyKey
+      uri: *apigeeProxyUri
+      validGrantTypes:
+        - client_credentials
+        - authorization_code
+        - implicit_grant
+        - password
+      passwordCheck:
+        helper: volos
+        function: passwordCheck
+      tokenPaths:  # These will be added to your paths section for you
+        authorize: /authorize
+        token: /accesstoken
+        invalidate: /invalidate
+        refresh: /refresh
+paths:
+  /twitter:
+    x-swagger-router-controller: twitter
+    x-a127-apply:
+      cache:
+        key:
+          helper: volos
+          function: cacheKey
+      quota: {}
+      analytics: {}
+    get:
+      description: Returns the results of a search of Twitter
+      summary: Returns the results of a search of Twitter
+      operationId: search
+      produces:
+        - application/json
+      parameters:
+        - name: search
+          in: query
+          description: The Query to pass to Twitter
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Twitter search response
+          schema:
+            $ref: "#/definitions/TwitterSearchResponse"
+        default:
+          description: Error payload
+          schema:
+            $ref: "#/definitions/ErrorModel"
+      security:
+        -
+          oauth2: []
+definitions:
+  TwitterSearchResponse:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      tag:
+        type: string
+  ErrorModel:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+securityDefinitions:
+  oauth2:
+    type: oauth2
+    scopes:
+      read: read access
+    flow: application
+    tokenUrl: ignored
