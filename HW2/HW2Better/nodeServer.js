@@ -10,7 +10,7 @@ var url = require("url");
 var a127 = require('a127-magic');
 var express = require('express');
 
-var PORT = process.env.PORT || 8889;
+var PORT = process.env.PORT || 10010;
 
 function startExpress(){
 	var app = express();
@@ -70,8 +70,8 @@ function startServer(){
 		 	default:
 		 		responseText = deniedRequest;
 		}
-		//response.writeHeader(200, {"Content-Type": "text/plain"});
-		response.write(responseText);
+		response.writeHeader(200, {"Content-Type": "application/json"});
+		//response.write(responseText);
 		response.end();
 	}
 	}).listen(8888);

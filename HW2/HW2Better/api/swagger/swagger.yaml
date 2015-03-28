@@ -21,7 +21,7 @@ schemes:
 # format of bodies a client can send (Content-Type)
 consumes:
   - application/json
-  - text/html
+  - applicaiton/x-www-form-urlencoded
 # format of the responses to the client (Accepts)
 produces:
   - application/json
@@ -29,62 +29,38 @@ x-a127-config:
   RemoteProxy.key: &apigeeProxyKey CONFIGURED
   RemoteProxy.uri: &apigeeProxyUri CONFIGURED
 x-a127-services: 
-  cache:
-    provider: volos-cache-memory
-    options:
-      name: name
-      ttl: 10000
-    quota:
-      provider: volos-quota-memory
-      options:
-      timeUnit: minute
-      interval: 1
-      allow: 2
-  analytics: 
-    provider: volos-analytics-apigee
-    options:
-      key: *apigeeProxyKey
-      uri: *apigeeProxyUri
-      proxy: HW2Better,
-      bufferSize: 100, 
-      flushInterval: 10, 
-      batchSize: 10
-  oauth2: 
-    provider: volos-oauth-apigee
-    options: 
-      cache: cache
-      key: *apigeeProxyKey
-      uri: *apigeeProxyUri
-      validGrantTypes:
-        - client_credentials
-        - authorization_code
-        - implicit_grant
-        - password
-      passwordCheck:
-        helper: volos
-        function: passwordCheck
-      tokenPaths: 
-        authorize: /authorize
-        token: /accesstoken
-        invalidate: /invalidate
-        refresh: /refresh
+   oauth2: 
+      provider: volos-oauth-apigee
+      options: 
+        tokenLifetime: 300000
+        key: *apigeeProxyKey
+        uri: *apigeeProxyUri
+        validGrantTypes:
+          - client_credentials
+          - authorization_code
+          - implicit_grant
+          - password
+        passwordCheck:
+          helper: volos
+          function: passwordCheck
+        tokenPaths: 
+          authorize: /authorize
+          token: /accesstoken
+          invalidate: /invalidate
+          refresh: /refresh
 paths:
   /put:
     # binds a127 app logic to a route
     x-swagger-router-controller: hw2_better
-    x-a127-apply: 
-      cache: 
-        key: 
-          helper: volos
-          function: cacheKey
-    get:
+    x-a127-apply: {} 
+    put:
       description: Returns response headers containing information about the request
       # used as the method name of the controller
-      operationId: get
+      operationId: put
       parameters:
         - name: name
           in: query
-          description: Sends a defined 'get' request to an area
+          description: Sends a defined 'put' request to an area
           required: false
           type: string
       responses:
@@ -99,24 +75,18 @@ paths:
           schema:
             $ref: "#/definitions/ErrorModel"
       security:
-        -
-          oauth2: []
+        - oauth2: []
   /delete:
     # binds a127 app logic to a route
     x-swagger-router-controller: hw2_better
-    x-a127-apply: 
-      cache: 
-        key: 
-        helper: volos
-        function: cacheKey
-    get:
+    delete:
       description: Returns response headers containing information about the request
       # used as the method name of the controller
-      operationId: get
+      operationId: delete
       parameters:
         - name: name
           in: query
-          description: Sends a defined 'get' request to an area
+          description: Sends a defined 'delete' request to an area
           required: false
           type: string
       responses:
@@ -131,24 +101,19 @@ paths:
           schema:
             $ref: "#/definitions/ErrorModel"
       security:
-        -
-          oauth2: []
+        - oauth2: []
   /post:
     # binds a127 app logic to a route
     x-swagger-router-controller: hw2_better
-    x-a127-apply: 
-      cache: 
-        key: 
-          helper: volos
-          function: cacheKey
-    get:
+    x-a127-apply: {} 
+    post:
       description: Returns response headers containing information about the request
       # used as the method name of the controller
-      operationId: get
+      operationId: post
       parameters:
         - name: name
           in: query
-          description: Sends a defined 'get' request to an area
+          description: Sends a defined 'post' request to an area
           required: false
           type: string
       responses:
@@ -163,16 +128,10 @@ paths:
           schema:
             $ref: "#/definitions/ErrorModel"
       security:
-        -
-           oauth2: []
+        - oauth2: []
   /get:
     # binds a127 app logic to a route
     x-swagger-router-controller: hw2_better
-    x-a127-apply: 
-      cache: 
-        key: 
-        helper: volos
-        function: cacheKey
     get:
       description: Returns response headers containing information about the request
       # used as the method name of the controller
@@ -212,6 +171,6 @@ securityDefinitions:
   oauth2: 
     type: oauth2
     scopes: 
-      read: read access
+      read: "allow read"
     flow: application
     tokenUrl: ignored

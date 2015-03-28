@@ -1,7 +1,6 @@
 'use strict';
 
 var secrets = require('./secrets');
-exports.twitter = secrets.twitter;
 exports.apigee = secrets.apigee;
 
 
