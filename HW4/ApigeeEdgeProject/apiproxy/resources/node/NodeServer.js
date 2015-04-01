@@ -1,8 +1,8 @@
 /*
  * William Daniels
- * Web API HW3 node.js server
+ * Web API HW4 node.js server
  * This server makes a web endpoint that can respons to a variety of different types of requests, and respond accordingly
- * It can currently parse up queries, request type, as well as a general echo of headers sent to the server. 
+ * It can currently parse up queries, request type, as well as a general echo of headers sent to the server.
  */
 var sys = require("sys");
 var my_http = require("http");
@@ -23,7 +23,7 @@ var currentQueryString;
 
 my_http.createServer(function(request, response) {
     //Chrome likes to send two requests every time, one looking for the favicon. I don't want to waste cycles on a favicon, so I check for
-    //this specific case. 
+    //this specific case.
     if (request.url === '/favicon.ico') {
         response.end();
     } else {
