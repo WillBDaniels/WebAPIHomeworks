@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="HW4">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1427914218892</CreatedAt>
+    <CreatedBy>willbdaniels@gmail.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>HW4</DisplayName>
+    <LastModifiedAt>1427930752384</LastModifiedAt>
+    <LastModifiedBy>willbdaniels@gmail.com</LastModifiedBy>
+    <Policies>
+        <Policy>remove-header-authorization</Policy>
+        <Policy>verify-oauth-v2-access-token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>node://NodeServer.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>
