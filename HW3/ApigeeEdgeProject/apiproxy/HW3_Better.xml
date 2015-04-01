@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="HW3_Better">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1427759851630</CreatedAt>
+    <CreatedBy>willbdaniels@gmail.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>HW3_Better</DisplayName>
+    <LastModifiedAt>1427759851630</LastModifiedAt>
+    <LastModifiedBy>willbdaniels@gmail.com</LastModifiedBy>
+    <Policies>
+        <Policy>remove-header-authorization</Policy>
+        <Policy>verify-oauth-v2-access-token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>node://NodeServer.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>
